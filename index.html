@@ -1,241 +1,243 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Destiny Wheel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destiny Wheel 💘 | Digital Web Hive</title>
 
 <style>
 body{
 margin:0;
-font-family:system-ui;
-background:radial-gradient(circle,#2b0020,#000);
+font-family:Arial, sans-serif;
+background:radial-gradient(circle,#260012,#000);
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-color:#fff;
+overflow:hidden;
+color:white;
 }
 
+/* Floating Hearts Background */
+.heart{
+position:absolute;
+font-size:22px;
+animation:float 6s linear infinite;
+opacity:.6;
+}
+@keyframes float{
+0%{transform:translateY(100vh) scale(.8)}
+100%{transform:translateY(-10vh) scale(1.4)}
+}
+
+/* Card */
 .card{
-width:420px;
-padding:35px;
-border-radius:26px;
+background:rgba(30,0,20,.85);
+padding:30px;
+border-radius:22px;
+width:350px;
 text-align:center;
-background:rgba(20,0,25,.6);
-backdrop-filter:blur(18px);
-box-shadow:0 0 80px #ff4d6d55;
+box-shadow:0 0 60px rgba(255,0,120,.4);
 }
 
-.brand{color:#ff4d6d;font-weight:700}
-.tag{font-size:12px;color:#aaa;margin-bottom:10px}
-h1{margin:10px 0 20px}
-
+/* Inputs */
 input{
 width:100%;
-padding:14px;
-margin-bottom:10px;
+padding:12px;
+margin:8px 0;
 border-radius:12px;
 border:none;
-background:#1a001f;
-color:#fff;
-}
-
-button{
-padding:14px 24px;
-border:none;
-border-radius:999px;
-cursor:pointer;
-margin:6px;
-font-weight:600;
-}
-
-.primary{
-background:linear-gradient(45deg,#ff4d6d,#ff758f);
+background:#1d0014;
 color:white;
-box-shadow:0 0 20px #ff4d6d;
 }
 
-.secondary{background:#111;color:#fff}
-.whatsapp{background:#25D366;color:#fff}
+/* Buttons */
+button{
+border:none;
+padding:12px 20px;
+border-radius:30px;
+margin:6px;
+cursor:pointer;
+}
+.spinBtn{
+background:#ff4d6d;
+color:white;
+font-weight:bold;
+box-shadow:0 0 12px #ff4d6d;
+}
+.whatsapp{
+background:#25D366;
+color:white;
+}
 
-/* ===== WHEEL AREA ===== */
-#wheelWrap{
+/* Wheel */
+.wheelWrap{
 position:relative;
-height:300px;
-display:flex;
-justify-content:center;
-align-items:center;
-perspective:900px;
-margin-top:20px;
+margin-top:15px;
 }
 
-#wheel{
-width:260px;
-height:260px;
+.pointer{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+font-size:26px;
+z-index:5;
+}
+
+.wheel{
+width:220px;
+height:220px;
 border-radius:50%;
 position:relative;
-
+margin:auto;
+transition:transform 4s cubic-bezier(.2,.7,.3,1);
 background:
 conic-gradient(
 #ff4d6d 0deg 60deg,
-#ff8fab 60deg 120deg,
+#ff8fa3 60deg 120deg,
 #ff4d6d 120deg 180deg,
-#ff8fab 180deg 240deg,
+#ff8fa3 180deg 240deg,
 #ff4d6d 240deg 300deg,
-#ff8fab 300deg 360deg
-);
-
-box-shadow:
-0 0 30px #ff4d6d,
-0 0 80px #ff4d6d,
-inset 0 0 30px #ffffff22;
-
-transition:transform 5s cubic-bezier(.12,.82,.32,1);
-transform-style:preserve-3d;
+#ff8fa3 300deg 360deg);
+box-shadow:0 0 40px #ff4d6d;
 }
 
-/* GLASS SHINE */
-#wheel::after{
-content:"";
+/* Labels inside wheel */
+.label{
 position:absolute;
-inset:0;
-border-radius:50%;
-background:linear-gradient(120deg,rgba(255,255,255,.25),transparent 40%);
+width:100%;
+height:100%;
+top:0;
+left:0;
+display:flex;
+justify-content:center;
+align-items:center;
+pointer-events:none;
 }
-
-/* POINTER */
-.pointer{
+.label span{
 position:absolute;
-top:-18px;
-font-size:28px;
-text-shadow:0 0 12px #ff4d6d;
-}
-
-/* TEXT INSIDE WHEEL — FIXED */
-.slice{
-position:absolute;
-left:50%;
-top:50%;
-width:120px;
-text-align:center;
-font-weight:700;
-font-size:14px;
+font-size:12px;
+font-weight:bold;
 transform-origin:center;
 }
 
-.s1{transform:translate(-50%,-105px)}
-.s2{transform:translate(45px,-55px) rotate(60deg)}
-.s3{transform:translate(45px,45px) rotate(120deg)}
-.s4{transform:translate(-50%,105px) rotate(180deg)}
-.s5{transform:translate(-145px,45px) rotate(240deg)}
-.s6{transform:translate(-145px,-55px) rotate(300deg)}
+.result{
+margin-top:15px;
+font-size:18px;
+font-weight:bold;
+}
 
-#analysis{margin-top:12px;color:#ccc;min-height:40px}
-#pair{margin-top:10px;font-size:20px;color:#ff4d6d;font-weight:700}
-#result{margin-top:6px;font-size:22px;font-weight:700}
+.brand{
+color:#ff4d6d;
+font-weight:bold;
+font-size:14px;
+margin-bottom:6px;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- floating hearts -->
+<script>
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(h);
+}
+</script>
+
 <div class="card">
 
 <div class="brand">Digital Web Hive</div>
-<div class="tag">Interactive Experiences That Convert</div>
-
-<h1>Destiny Wheel 💘</h1>
+<h2>Destiny Wheel 💘</h2>
 
 <input id="name1" placeholder="Your Name">
 <input id="name2" placeholder="Partner Name">
 
-<button class="primary" onclick="spin()">Spin Destiny</button>
+<button class="spinBtn" onclick="spinWheel()">Spin Destiny</button>
 
-<div id="wheelWrap">
-<div class="pointer">💘</div>
+<div class="wheelWrap">
+<div class="pointer">🔻</div>
 
-<div id="wheel">
+<div id="wheel" class="wheel">
 
-<div class="slice s1">❤️ LOVE</div>
-<div class="slice s2">💞 SOUL</div>
-<div class="slice s3">💍 MARRY</div>
-<div class="slice s4">🥰 CARE</div>
-<div class="slice s5">🤝 FRIEND</div>
-<div class="slice s6">😅 CHAOS</div>
+<div class="label">
+<span style="transform:rotate(30deg) translate(70px)">❤️ LOVE</span>
+<span style="transform:rotate(90deg) translate(70px)">💞 SOUL</span>
+<span style="transform:rotate(150deg) translate(70px)">🤝 FRIEND</span>
+<span style="transform:rotate(210deg) translate(70px)">😅 CHAOS</span>
+<span style="transform:rotate(270deg) translate(70px)">💍 MARRY</span>
+<span style="transform:rotate(330deg) translate(70px)">🤗 CARE</span>
+</div>
 
 </div>
 </div>
 
-<div id="analysis"></div>
-<div id="pair"></div>
-<div id="result"></div>
+<div id="result" class="result"></div>
 
-<button class="secondary" onclick="share()">Share</button>
-<button class="secondary" onclick="location.reload()">Restart</button>
-<br>
-<button class="whatsapp" onclick="openWhatsApp()">WhatsApp</button>
+<div>
+<button onclick="share()">Share</button>
+<button onclick="location.reload()">Restart</button>
+</div>
+
+<a href="https://wa.me/64212456560" target="_blank">
+<button class="whatsapp">WhatsApp</button>
+</a>
 
 </div>
 
 <script>
 
-const results=[
-"❤️ True Love Connection!",
+/* ===== ZODIAC ENERGY LOGIC ===== */
+
+const outcomes=[
+"❤️ Love Energy!",
 "💞 Soulmate Vibes!",
-"💍 Wedding Bells Ahead!",
-"🥰 Caring Bond!",
-"🤝 Best Friends Energy!",
-"😅 It's Complicated!"
+"🤝 Best Friends!",
+"😅 It's Complicated!",
+"💍 Marriage Destiny!",
+"🤗 Care Connection!"
 ];
 
-let currentRotation=0;
-
-function typeAI(text){
-analysis.innerText="";
-let i=0;
-const t=setInterval(()=>{
-analysis.innerText+=text[i];
-i++;
-if(i>=text.length)clearInterval(t);
-},20);
+function zodiacScore(name){
+name=name.toLowerCase().replace(/[^a-z]/g,'');
+let sum=0;
+for(let c of name){
+sum+=c.charCodeAt(0)-96;
+}
+return sum;
 }
 
-function spin(){
+function spinWheel(){
 
-const n1=name1.value.trim();
-const n2=name2.value.trim();
+let n1=document.getElementById("name1").value;
+let n2=document.getElementById("name2").value;
+if(!n1 || !n2){alert("Enter both names");return;}
 
-if(!n1||!n2){
-alert("Enter both names");
-return;
-}
+let energy=zodiacScore(n1)+zodiacScore(n2);
+let index=energy%6;
 
-typeAI("⚡ Charging destiny energy... ❤️ Aligning hearts... 🔢 Selecting outcome...");
+/* angle calculation */
+let wheel=document.getElementById("wheel");
+let angle=(360*5)+(index*60);
+wheel.style.transform="rotate("+angle+"deg)";
 
-/* REAL PHYSICS */
-const index=Math.floor(Math.random()*6);
-const sliceDeg=360/6;
-const stopAngle=(360-(index*sliceDeg)-sliceDeg/2);
-
-const extraSpins=5*360;
-currentRotation+=extraSpins+stopAngle;
-
-wheel.style.transform=
-`rotateX(8deg) rotateY(-6deg) rotate(${currentRotation}deg)`;
-
+/* show result */
 setTimeout(()=>{
-pair.innerText=`${n1} 💘 ${n2}`;
-result.innerText=results[index];
-},5000);
+document.getElementById("result").innerHTML=
+n1+" 💘 "+n2+"<br>"+outcomes[index];
+},3500);
 }
 
 function share(){
-navigator.clipboard.writeText(pair.innerText+" — "+result.innerText);
-alert("Result copied!");
-}
-
-function openWhatsApp(){
-window.open("https://wa.me/64212456560","_blank");
+navigator.clipboard.writeText(window.location.href);
+alert("Link copied!");
 }
 
 </script>
