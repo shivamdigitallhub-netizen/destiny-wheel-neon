@@ -1,92 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Destiny Wheel | Digital Web Hive</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Destiny Wheel</title>
 
 <style>
-*{box-sizing:border-box}
 body{
 margin:0;
-height:100vh;
-font-family:system-ui,-apple-system,sans-serif;
-background:radial-gradient(circle at center,#1a001f,#000);
+font-family:system-ui;
+background:radial-gradient(circle,#260018,#000);
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
+height:100vh;
 color:#fff;
-}
-
-/* Neon Aura */
-.auraStrong{
-animation:auraStrong 1.8s ease-in-out infinite alternate;
-}
-@keyframes auraStrong{
-from{box-shadow:0 0 25px #ff4d6d}
-to{box-shadow:0 0 120px #ff4d6d}
-}
-
-/* Floating emoji */
-.float{
-position:absolute;
-bottom:-20px;
-font-size:20px;
-animation:floatUp linear infinite;
-}
-@keyframes floatUp{
-to{transform:translateY(-120vh);opacity:0}
-}
-
-/* Electric Sparks */
-.spark{
-position:absolute;
-font-size:14px;
-animation:sparkSpin linear infinite;
-}
-@keyframes sparkSpin{
-to{transform:rotate(360deg)}
-}
-
-/* Heart burst */
-.burst{
-position:absolute;
-font-size:28px;
-animation:burst 1s ease-out forwards;
-}
-@keyframes burst{
-0%{transform:scale(.5);opacity:1}
-100%{transform:translateY(-120px) scale(1.6);opacity:0}
-}
-
-/* ⭐ Neon Particle Explosion */
-.particle{
-position:absolute;
-width:6px;
-height:6px;
-background:#ff4d6d;
-border-radius:50%;
-box-shadow:0 0 10px #ff4d6d,0 0 20px #ff4d6d;
-animation:explode 1s ease-out forwards;
-}
-@keyframes explode{
-0%{transform:translate(0,0);opacity:1}
-100%{transform:translate(var(--x),var(--y));opacity:0}
+overflow:hidden;
 }
 
 .card{
 background:#0f0014;
-padding:36px;
-border-radius:26px;
-width:92%;
-max-width:560px;
+padding:35px;
+border-radius:24px;
+width:420px;
 text-align:center;
-box-shadow:0 0 40px #ff4d6d44;
+box-shadow:0 0 60px #ff4d6d55;
 }
 
-.brand{font-weight:800;color:#ff4d6d}
-.tagline{font-size:12px;color:#aaa;margin-bottom:10px}
+.brand{
+color:#ff4d6d;
+font-weight:700;
+}
+
+.tag{
+font-size:12px;
+color:#aaa;
+margin-bottom:8px;
+}
+
+h1{
+margin:10px 0 20px;
+}
 
 input{
 width:100%;
@@ -99,32 +53,37 @@ color:#fff;
 }
 
 button{
-padding:14px 26px;
+padding:14px 24px;
 border:none;
 border-radius:999px;
 background:#ff4d6d;
 color:#fff;
 cursor:pointer;
-margin-top:10px;
-box-shadow:0 0 15px #ff4d6d88;
+margin:6px;
 }
 
-.secondary{background:#111;margin:6px}
-.whatsapp{background:#25D366}
+.secondary{
+background:#111;
+}
+
+.whatsapp{
+background:#25D366;
+}
 
 /* Wheel */
 #wheelWrap{
-margin-top:30px;
 position:relative;
-height:240px;
+margin-top:20px;
+height:260px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 #wheel{
 width:220px;
 height:220px;
 border-radius:50%;
-margin:auto;
-position:relative;
 background:
 conic-gradient(
 #ff4d6d 0deg 60deg,
@@ -136,36 +95,18 @@ conic-gradient(
 );
 box-shadow:
 0 0 20px #ff4d6d,
-0 0 40px #ff4d6d,
-0 0 80px #ff4d6d55;
-transition:transform 4s cubic-bezier(.17,.67,.28,1.35);
+0 0 60px #ff4d6d;
+transition:transform 4s cubic-bezier(.2,.8,.2,1);
+position:relative;
 }
 
-/* Electric Ring */
-.electricRing{
+/* Clean upright labels */
+.slice{
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%);
-width:260px;
-height:260px;
-border-radius:50%;
-border:2px dashed #ff4d6d;
-animation:electricSpin 1s linear infinite;
-box-shadow:0 0 20px #ff4d6d;
-pointer-events:none;
-}
-@keyframes electricSpin{
-to{transform:translate(-50%,-50%) rotate(360deg);}
-}
-
-/* Slice labels */
-.sliceLabel{
-position:absolute;
-left:50%;
-top:50%;
-transform-origin:center -90px;
-font-size:12px;
+transform-origin:center -85px;
+font-size:13px;
 font-weight:700;
 color:#fff;
 text-shadow:0 0 6px #ff4d6d;
@@ -174,179 +115,127 @@ text-shadow:0 0 6px #ff4d6d;
 .pointer{
 position:absolute;
 top:-12px;
-left:50%;
-transform:translateX(-50%);
-font-size:28px;
+font-size:26px;
 color:#ff4d6d;
 text-shadow:0 0 10px #ff4d6d;
 }
 
-#analysis{margin-top:14px;font-size:14px;color:#ccc;min-height:60px;}
-#pairTitle{font-size:20px;font-weight:700;margin-top:12px;color:#ff4d6d;}
-#result{font-size:24px;font-weight:700;margin-top:10px;}
+#analysis{
+margin-top:15px;
+min-height:60px;
+color:#ccc;
+font-size:14px;
+}
+
+#pair{
+margin-top:10px;
+font-size:20px;
+color:#ff4d6d;
+font-weight:700;
+}
+
+#result{
+margin-top:8px;
+font-size:22px;
+font-weight:700;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div class="card">
 
 <div class="brand">Digital Web Hive</div>
-<div class="tagline">Interactive Experiences That Convert</div>
+<div class="tag">Interactive Experiences That Convert</div>
 
 <h1>Destiny Wheel 💘</h1>
 
-<div id="form">
 <input id="name1" placeholder="Your Name">
 <input id="name2" placeholder="Partner Name">
-<button onclick="startSpin()">Spin Destiny</button>
-</div>
+
+<button onclick="spin()">Spin Destiny</button>
 
 <div id="wheelWrap">
 <div class="pointer">💘</div>
-<div id="electric" class="electricRing" style="display:none"></div>
 
 <div id="wheel">
-<div class="sliceLabel" style="transform:rotate(0deg)">❤️ LOVE</div>
-<div class="sliceLabel" style="transform:rotate(60deg)">💞 SOUL</div>
-<div class="sliceLabel" style="transform:rotate(120deg)">💍 MARRY</div>
-<div class="sliceLabel" style="transform:rotate(180deg)">🥰 CARE</div>
-<div class="sliceLabel" style="transform:rotate(240deg)">🤝 FRIEND</div>
-<div class="sliceLabel" style="transform:rotate(300deg)">😅 CHAOS</div>
+
+<div class="slice" style="transform:rotate(0deg)">❤️ LOVE</div>
+<div class="slice" style="transform:rotate(60deg)">💞 SOUL</div>
+<div class="slice" style="transform:rotate(120deg)">💍 MARRY</div>
+<div class="slice" style="transform:rotate(180deg)">🥰 CARE</div>
+<div class="slice" style="transform:rotate(240deg)">🤝 FRIEND</div>
+<div class="slice" style="transform:rotate(300deg)">😅 CHAOS</div>
+
 </div>
 </div>
 
 <div id="analysis"></div>
-<div id="pairTitle"></div>
+<div id="pair"></div>
 <div id="result"></div>
 
-<div>
 <button class="secondary" onclick="share()">Share</button>
 <button class="secondary" onclick="location.reload()">Restart</button>
 <br>
 <button class="whatsapp" onclick="openWhatsApp()">WhatsApp</button>
-</div>
 
 </div>
 
 <script>
 
-/* Floating emojis */
-let floatingEmoji="❤️";
-setInterval(()=>{
-const e=document.createElement("div");
-e.className="float";
-e.innerText=floatingEmoji;
-e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=(4+Math.random()*3)+"s";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),7000);
-},700);
+const slices=[
+{key:"love",text:"❤️ True Love Connection!"},
+{key:"soul",text:"💞 Soulmate Vibes!"},
+{key:"marry",text:"💍 Wedding Bells Ahead!"},
+{key:"care",text:"🥰 Caring Bond!"},
+{key:"friend",text:"🤝 Best Friends Energy!"},
+{key:"chaos",text:"😅 It's Complicated!"}
+];
 
-const slices=["love","soul","marriage","affection","friends","complicated"];
-
-const results={
-friends:{text:"🤝 Best Friends Energy!",emoji:"🤝"},
-love:{text:"❤️ True Love Connection!",emoji:"❤️"},
-soul:{text:"💞 Soulmate Vibes!",emoji:"💞"},
-marriage:{text:"💍 Wedding Bells Ahead!",emoji:"💍"},
-affection:{text:"🥰 Cute Affection!",emoji:"🥰"},
-complicated:{text:"😅 It’s Complicated!",emoji:"😅"}
-};
-
-let n1="",n2="";
-
-/* Voice AI typing */
-function typeAI(text,delay=20){
-return new Promise(resolve=>{
-let i=0;
-const interval=setInterval(()=>{
-analysis.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length){
-clearInterval(interval);
-analysis.innerHTML+="<br>";
-resolve();
-}
-},delay);
-});
-}
-
-async function startSpin(){
-
-n1=name1.value.trim();
-n2=name2.value.trim();
-
-if(!n1||!n2){alert("Enter both names");return;}
-
-form.style.display="none";
+function typeAI(text){
 analysis.innerHTML="";
-electric.style.display="block";
+let i=0;
+const int=setInterval(()=>{
+analysis.innerHTML+=text[i];
+i++;
+if(i>=text.length)clearInterval(int);
+},20);
+}
 
-await typeAI("⚡ Charging neon destiny energy…");
-await typeAI("❤️ Aligning heart frequencies…");
-await typeAI("🔢 Selecting destiny outcome…");
+function spin(){
 
-const sliceIndex=Math.floor(Math.random()*6);
-const deg=3600+(sliceIndex*60);
+const n1=name1.value.trim();
+const n2=name2.value.trim();
 
-wheel.style.transform=`rotateZ(${deg}deg)`;
+if(!n1||!n2){
+alert("Enter both names");
+return;
+}
+
+typeAI("⚡ Charging destiny energy...\n❤️ Aligning hearts...\n🔢 Selecting outcome...");
+
+const index=Math.floor(Math.random()*6);
+const deg=3600+(index*60);
+
+wheel.style.transform=`rotate(${deg}deg)`;
 
 setTimeout(()=>{
-electric.style.display="none";
-showResult(slices[sliceIndex]);
+pair.innerText=`${n1} 💘 ${n2}`;
+result.innerText=slices[index].text;
 },4000);
 }
 
-/* ⭐ Neon Particle Explosion */
-function particleExplosion(){
-for(let i=0;i<40;i++){
-const p=document.createElement("div");
-p.className="particle";
-p.style.left="50vw";
-p.style.top="50vh";
-p.style.setProperty("--x",(Math.random()*400-200)+"px");
-p.style.setProperty("--y",(Math.random()*400-200)+"px");
-document.body.appendChild(p);
-setTimeout(()=>p.remove(),1000);
-}
-}
-
-function showResult(key){
-
-const r=results[key];
-const card=document.getElementById("card");
-
-floatingEmoji=r.emoji;
-card.classList.add("auraStrong");
-
-pairTitle.innerText=`${n1} ${r.emoji} ${n2}`;
-result.innerText=r.text;
-
-particleExplosion();
-
-/* heart burst */
-for(let i=0;i<14;i++){
-const h=document.createElement("div");
-h.className="burst";
-h.innerText=r.emoji;
-h.style.left=(45+Math.random()*10)+"vw";
-h.style.bottom="40vh";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),1000);
-}
-}
-
 function share(){
-navigator.clipboard.writeText(`${n1} ${floatingEmoji} ${n2} — ${result.innerText}`);
+navigator.clipboard.writeText(pair.innerText+" — "+result.innerText);
 alert("Result copied");
 }
 
 function openWhatsApp(){
-const msg=encodeURIComponent("Hi Digital Web Hive! I loved the Destiny Wheel experience.");
-window.open("https://wa.me/64212456560?text="+msg,"_blank");
+window.open("https://wa.me/64212456560","_blank");
 }
 
 </script>
+
 </body>
 </html>
