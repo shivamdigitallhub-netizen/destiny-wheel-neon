@@ -6,25 +6,33 @@
 <title>Destiny Wheel</title>
 
 <style>
+
 body{
 margin:0;
 font-family:system-ui;
-background:radial-gradient(circle,#260018,#000);
+background:radial-gradient(circle at center,#2b0020,#000);
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-color:#fff;
+color:white;
 overflow:hidden;
 }
 
+/* CARD */
 .card{
-background:#0f0014;
-padding:35px;
-border-radius:24px;
 width:420px;
+padding:35px;
+border-radius:26px;
 text-align:center;
-box-shadow:0 0 60px #ff4d6d55;
+
+background:rgba(20,0,25,0.55);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 0 80px #ff4d6d55,
+inset 0 0 30px #ffffff08;
 }
 
 .brand{
@@ -35,55 +43,66 @@ font-weight:700;
 .tag{
 font-size:12px;
 color:#aaa;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
-h1{
-margin:10px 0 20px;
-}
+h1{margin:10px 0 20px}
 
+/* INPUTS */
 input{
 width:100%;
 padding:14px;
 margin-bottom:10px;
-border-radius:10px;
+border-radius:12px;
 border:none;
 background:#1a001f;
 color:#fff;
+outline:none;
 }
 
+/* BUTTONS */
 button{
 padding:14px 24px;
 border:none;
 border-radius:999px;
-background:#ff4d6d;
-color:#fff;
 cursor:pointer;
 margin:6px;
+font-weight:600;
+}
+
+.primary{
+background:linear-gradient(45deg,#ff4d6d,#ff758f);
+color:white;
+box-shadow:0 0 20px #ff4d6d;
 }
 
 .secondary{
 background:#111;
+color:#fff;
 }
 
 .whatsapp{
 background:#25D366;
+color:#fff;
 }
 
-/* Wheel */
+/* 3D GLASS WHEEL AREA */
 #wheelWrap{
-position:relative;
 margin-top:20px;
-height:260px;
+position:relative;
+height:280px;
 display:flex;
 justify-content:center;
 align-items:center;
+perspective:900px;
 }
 
 #wheel{
-width:220px;
-height:220px;
+width:260px;
+height:260px;
 border-radius:50%;
+position:relative;
+
 background:
 conic-gradient(
 #ff4d6d 0deg 60deg,
@@ -93,38 +112,60 @@ conic-gradient(
 #ff4d6d 240deg 300deg,
 #ff8fab 300deg 360deg
 );
-box-shadow:
-0 0 20px #ff4d6d,
-0 0 60px #ff4d6d;
+
+transform-style:preserve-3d;
 transition:transform 4s cubic-bezier(.2,.8,.2,1);
-position:relative;
+
+box-shadow:
+0 0 30px #ff4d6d,
+0 0 80px #ff4d6d,
+inset 0 0 30px #ffffff22;
 }
 
-/* Clean upright labels */
-.slice{
+/* GLASS SHINE LAYER */
+#wheel::after{
+content:"";
 position:absolute;
-top:50%;
-left:50%;
-transform-origin:center -85px;
-font-size:13px;
-font-weight:700;
-color:#fff;
-text-shadow:0 0 6px #ff4d6d;
+inset:0;
+border-radius:50%;
+background:
+linear-gradient(120deg,rgba(255,255,255,.25),transparent 40%);
+mix-blend-mode:overlay;
 }
 
+/* POINTER */
 .pointer{
 position:absolute;
-top:-12px;
-font-size:26px;
-color:#ff4d6d;
-text-shadow:0 0 10px #ff4d6d;
+top:-18px;
+font-size:28px;
+text-shadow:0 0 15px #ff4d6d;
 }
 
-#analysis{
-margin-top:15px;
-min-height:60px;
-color:#ccc;
+/* TEXT INSIDE SLICES */
+.slice{
+position:absolute;
+width:100%;
+top:50%;
+left:50%;
 font-size:14px;
+font-weight:700;
+text-shadow:0 0 6px #ff4d6d;
+transform-origin:center;
+}
+
+.s1{transform:translate(-50%,-110px)}
+.s2{transform:translate(50px,-50px) rotate(60deg)}
+.s3{transform:translate(50px,50px) rotate(120deg)}
+.s4{transform:translate(-50%,105px) rotate(180deg)}
+.s5{transform:translate(-150px,50px) rotate(240deg)}
+.s6{transform:translate(-150px,-50px) rotate(300deg)}
+
+/* RESULT */
+#analysis{
+margin-top:12px;
+min-height:50px;
+font-size:14px;
+color:#ccc;
 }
 
 #pair{
@@ -135,10 +176,11 @@ font-weight:700;
 }
 
 #result{
-margin-top:8px;
+margin-top:6px;
 font-size:22px;
 font-weight:700;
 }
+
 </style>
 </head>
 
@@ -154,21 +196,23 @@ font-weight:700;
 <input id="name1" placeholder="Your Name">
 <input id="name2" placeholder="Partner Name">
 
-<button onclick="spin()">Spin Destiny</button>
+<button class="primary" onclick="spin()">Spin Destiny</button>
 
 <div id="wheelWrap">
+
 <div class="pointer">💘</div>
 
 <div id="wheel">
 
-<div class="slice" style="transform:rotate(0deg)">❤️ LOVE</div>
-<div class="slice" style="transform:rotate(60deg)">💞 SOUL</div>
-<div class="slice" style="transform:rotate(120deg)">💍 MARRY</div>
-<div class="slice" style="transform:rotate(180deg)">🥰 CARE</div>
-<div class="slice" style="transform:rotate(240deg)">🤝 FRIEND</div>
-<div class="slice" style="transform:rotate(300deg)">😅 CHAOS</div>
+<div class="slice s1">❤️ LOVE</div>
+<div class="slice s2">💞 SOUL</div>
+<div class="slice s3">💍 MARRY</div>
+<div class="slice s4">🥰 CARE</div>
+<div class="slice s5">🤝 FRIEND</div>
+<div class="slice s6">😅 CHAOS</div>
 
 </div>
+
 </div>
 
 <div id="analysis"></div>
@@ -185,21 +229,21 @@ font-weight:700;
 <script>
 
 const slices=[
-{key:"love",text:"❤️ True Love Connection!"},
-{key:"soul",text:"💞 Soulmate Vibes!"},
-{key:"marry",text:"💍 Wedding Bells Ahead!"},
-{key:"care",text:"🥰 Caring Bond!"},
-{key:"friend",text:"🤝 Best Friends Energy!"},
-{key:"chaos",text:"😅 It's Complicated!"}
+"❤️ True Love Connection!",
+"💞 Soulmate Vibes!",
+"💍 Wedding Bells Ahead!",
+"🥰 Caring Bond!",
+"🤝 Best Friends Energy!",
+"😅 It's Complicated!"
 ];
 
 function typeAI(text){
-analysis.innerHTML="";
+analysis.innerText="";
 let i=0;
-const int=setInterval(()=>{
-analysis.innerHTML+=text[i];
+const t=setInterval(()=>{
+analysis.innerText+=text[i];
 i++;
-if(i>=text.length)clearInterval(int);
+if(i>=text.length)clearInterval(t);
 },20);
 }
 
@@ -213,22 +257,22 @@ alert("Enter both names");
 return;
 }
 
-typeAI("⚡ Charging destiny energy...\n❤️ Aligning hearts...\n🔢 Selecting outcome...");
+typeAI("⚡ Charging destiny energy... ❤️ Aligning hearts... 🔢 Selecting outcome...");
 
 const index=Math.floor(Math.random()*6);
-const deg=3600+(index*60);
 
-wheel.style.transform=`rotate(${deg}deg)`;
+const rotation=3600+(index*60);
+wheel.style.transform=`rotateX(8deg) rotateY(-6deg) rotate(${rotation}deg)`;
 
 setTimeout(()=>{
 pair.innerText=`${n1} 💘 ${n2}`;
-result.innerText=slices[index].text;
+result.innerText=slices[index];
 },4000);
 }
 
 function share(){
 navigator.clipboard.writeText(pair.innerText+" — "+result.innerText);
-alert("Result copied");
+alert("Result copied!");
 }
 
 function openWhatsApp(){
